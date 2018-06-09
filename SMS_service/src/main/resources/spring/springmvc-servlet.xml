@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 配置注解扫描的包 -->
+    <context:component-scan base-package="com.abyss.controller"/>
+    <!-- 配置注解驱动:作用相当于配置spring推荐的支持注解的映射器和适配器 -->
+    <mvc:annotation-driven/>
+    <!-- 静态资源访问 -->
+    <mvc:default-servlet-handler/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置前缀：去哪个目录下找视图 -->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <!-- 配置后缀：找以.jsp为后缀的视图 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--注册自定义Excel视图-->
+    <bean name="userExcelView" class="com.abyss.view.UserExcelView"/>
+
+    <!--自定义视图解析器-->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="1"/>
+    </bean>
+
+</beans>
